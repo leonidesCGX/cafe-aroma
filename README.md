@@ -100,6 +100,33 @@ src/app/
 └── contact/                 # Formulario de contacto
 ```
 
+## 🗣️ Propuesta de Mejora: Sección de Testimonios
+
+### **Descripción de la Propuesta**
+Como parte del ejercicio complementario, se ha diseñado una **sección de testimonios de clientes** que se integra perfectamente con el diseño existente de Café Aroma.
+
+### **Características de la Propuesta**
+- **🎯 Objetivo**: Generar confianza a través de social proof
+- **🎨 Diseño**: Coherente con la paleta de colores y tipografía existente
+- **📱 Responsive**: Optimizado para desktop, tablet y móvil
+- **⚡ Performance**: Implementación ligera y escalable
+
+### **Implementación Técnica**
+- **Componente Angular standalone** con datos mock
+- **Grid responsive** (3 columnas en desktop, 1 en móvil)
+- **Integración con routing** existente
+- **Datos mock realistas** con testimonios de clientes
+
+### **Archivos de la Propuesta**
+```
+mockups/
+├── README-testimonios.md    # Documentación completa de la propuesta
+├── testimonios-desktop.png  # Mockup visual para desktop
+└── testimonios-mobile.png   # Mockup visual para móvil
+```
+
+**Nota**: Los mockups visuales están en la carpeta `/mockups/` y demuestran la coherencia visual y criterio UX de la propuesta.
+
 ### **Características Técnicas**
 - **Componentes Standalone** - Sin dependencias de módulos
 - **Routing Dinámico** - Navegación SPA con Angular Router

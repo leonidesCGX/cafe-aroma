@@ -76,4 +76,9 @@ export class AppComponent {
     console.log('Navegar a contacto');
     this.router.navigate(['/contacto']);
   }
+
+  onNavegarTestimonios() {
+    console.log('Navegar a testimonios');
+    this.router.navigate(['/testimonios']);
+  }
 }

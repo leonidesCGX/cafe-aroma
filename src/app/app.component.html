@@ -29,6 +29,11 @@
             (click)="onNavegarContacto()">
             Contacto
           </button>
+          <button 
+            [class]="isRouteActive('/testimonios') ? 'px-3 py-2 rounded-md bg-accent text-accent-foreground' : 'px-3 py-2 rounded-md hover:text-accent hover:bg-primary-foreground/10'"
+            (click)="onNavegarTestimonios()">
+            Testimonios
+          </button>
         </div>
       </div>
       
@@ -72,6 +77,11 @@
           [class]="isRouteActive('/contacto') ? 'block w-full text-left px-3 py-2 transition-colors rounded-md bg-accent text-accent-foreground' : 'block w-full text-left px-3 py-2 transition-colors rounded-md text-primary-foreground hover:text-accent hover:bg-primary-foreground/10'"
           (click)="onNavegarContacto()">
           Contacto
+        </button>
+        <button 
+          [class]="isRouteActive('/testimonios') ? 'block w-full text-left px-3 py-2 transition-colors rounded-md bg-accent text-accent-foreground' : 'block w-full text-left px-3 py-2 transition-colors rounded-md text-primary-foreground hover:text-accent hover:bg-primary-foreground/10'"
+          (click)="onNavegarTestimonios()">
+          Testimonios
         </button>
       </div>
     </div>

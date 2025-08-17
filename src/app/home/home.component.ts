@@ -32,4 +32,9 @@ export class HomeComponent {
     console.log('Navegar al menú');
     this.router.navigate(['/catalogo']);
   }
+
+  onVerTestimonios() {
+    console.log('Navegar a testimonios');
+    this.router.navigate(['/testimonios']);
+  }
 }

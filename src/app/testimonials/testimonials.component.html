@@ -1,0 +1,98 @@
+<div class="min-h-screen bg-background">
+  <!-- Header Section -->
+  <section class="bg-card py-16 md:py-20">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        Lo que dicen nuestros clientes
+      </h1>
+      <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+        Descubre por qué la gente ama Café Aroma y cómo hemos creado experiencias únicas para cada visitante
+      </p>
+    </div>
+  </section>
+
+  <!-- Testimonials Grid -->
+  <section class="py-12 md:py-16">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div 
+          *ngFor="let testimonial of testimonials" 
+          class="bg-card rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-border"
+        >
+          <!-- Customer Info Header -->
+          <div class="flex items-center mb-4">
+            <img 
+              [src]="testimonial.avatarUrl" 
+              [alt]="testimonial.customerName"
+              class="w-16 h-16 rounded-full object-cover mr-4 border-2 border-accent/30"
+            >
+            <div class="flex-1">
+              <h3 class="font-semibold text-foreground text-lg">
+                {{ testimonial.customerName }}
+              </h3>
+              <p class="text-muted-foreground text-sm">
+                {{ testimonial.occupation }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Rating Stars -->
+          <div class="flex items-center mb-4">
+            <div class="flex">
+              <svg 
+                *ngFor="let star of getStars(testimonial.rating)"
+                class="w-5 h-5 text-accent fill-current"
+                viewBox="0 0 20 20"
+              >
+                <path d="M10 15l-5.898 3.26 1.127-6.563L.49 6.26l6.627-.966L10 0l2.883 5.294 6.627.966-4.739 4.617 1.127 6.563z"/>
+              </svg>
+              <svg 
+                *ngFor="let star of getEmptyStars(testimonial.rating)"
+                class="w-5 h-5 text-muted fill-current"
+                viewBox="0 0 20 20"
+              >
+                <path d="M10 15l-5.898 3.26 1.127-6.563L.49 6.26l6.627-.966L10 0l2.883 5.294 6.627.966-4.739 4.617 1.127 6.563z"/>
+              </svg>
+            </div>
+            <span class="text-muted-foreground text-sm ml-2">
+              {{ testimonial.visitDate }}
+            </span>
+          </div>
+
+          <!-- Testimonial Text -->
+          <blockquote class="text-foreground text-base leading-relaxed italic">
+            "{{ testimonial.testimonial }}"
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="bg-accent/10 py-16 md:py-20">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-foreground mb-6">
+        ¿Listo para vivir la experiencia Café Aroma?
+      </h2>
+      <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+        Únete a nuestros clientes satisfechos y descubre por qué somos la cafetería favorita de la ciudad
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button 
+          (click)="onVolverInicio()"
+          class="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold py-3 px-8 rounded-lg transition-colors duration-300"
+        >
+          Volver al Inicio
+        </button>
+        <button 
+          (click)="onContactar()"
+          class="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold py-3 px-8 rounded-lg transition-colors duration-300"
+        >
+          Contáctanos
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+</div>
