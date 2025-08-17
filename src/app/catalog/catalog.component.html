@@ -1,0 +1,120 @@
+<!-- Main Content Area -->
+<div class="min-h-screen bg-background py-8 md:py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Catalog Title and Description -->
+    <div class="text-center mb-12">
+      <h1 class="text-foreground mb-4 text-4xl md:text-5xl">Nuestro Catálogo</h1>
+      <p class="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        Explora nuestra selección completa de cafés premium, tés aromáticos, productos de panadería y postres artesanales.
+      </p>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="mb-8">
+      <div class="flex flex-wrap justify-center gap-2 md:gap-4">
+        <button 
+          (click)="onFilterByCategory('Todos los productos')"
+          [class]="isCategoryActive('Todos los productos') ? 'px-4 md:px-6 py-2 rounded-lg transition-colors text-sm md:text-base bg-primary text-primary-foreground' : 'px-4 md:px-6 py-2 rounded-lg transition-colors text-sm md:text-base bg-card text-card-foreground border border-border hover:bg-accent/50'">
+          Todos los productos
+        </button>
+        <button 
+          (click)="onFilterByCategory('Cafés')"
+          [class]="isCategoryActive('Cafés') ? 'px-4 md:px-6 py-2 rounded-lg transition-colors text-sm md:text-base bg-primary text-primary-foreground' : 'px-4 md:px-6 py-2 rounded-lg transition-colors text-sm md:text-base bg-card text-card-foreground border border-border hover:bg-accent/50'">
+          Cafés
+        </button>
+        <button 
+          (click)="onFilterByCategory('Tés')"
+          [class]="isCategoryActive('Tés') ? 'px-4 md:px-6 py-2 rounded-lg transition-colors text-sm md:text-base bg-primary text-primary-foreground' : 'px-4 md:px-6 py-2 rounded-lg transition-colors text-sm md:text-base bg-card text-card-foreground border border-border hover:bg-accent/50'">
+          Tés
+        </button>
+        <button 
+          (click)="onFilterByCategory('Panadería')"
+          [class]="isCategoryActive('Panadería') ? 'px-4 md:px-6 py-2 rounded-lg transition-colors text-sm md:text-base bg-primary text-primary-foreground' : 'px-4 md:px-6 py-2 rounded-lg transition-colors text-sm md:text-base bg-card text-card-foreground border border-border hover:bg-accent/50'">
+          Panadería
+        </button>
+        <button 
+          (click)="onFilterByCategory('Postres')"
+          [class]="isCategoryActive('Postres') ? 'px-4 md:px-6 py-2 rounded-lg transition-colors text-sm md:text-base bg-primary text-primary-foreground' : 'px-4 md:px-6 py-2 rounded-lg transition-colors text-sm md:text-base bg-card text-card-foreground border border-border hover:bg-accent/50'">
+          Postres
+        </button>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
+      
+      <!-- Product Cards - Dynamic based on current page -->
+      <div *ngFor="let product of currentProducts" class="bg-card rounded-lg shadow-sm border border-border overflow-hidden transition-all duration-200 hover:shadow-md hover:scale-105">
+        <div class="aspect-square w-full overflow-hidden">
+          <!-- Check if image is a placeholder or real URL -->
+          <ng-container *ngIf="product.imageUrl.startsWith('data:image') || product.imageUrl.startsWith('data:image/svg')">
+            <div class="inline-block bg-gray-100 text-center align-middle w-full h-full object-cover">
+              <div class="flex items-center justify-center w-full h-full">
+                <img [src]="product.imageUrl" 
+                     [alt]="product.name" 
+                     class="w-full h-full object-cover">
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!product.imageUrl.startsWith('data:')">
+            <img [src]="product.imageUrl" 
+                 [alt]="product.name" 
+                 class="w-full h-full object-cover">
+          </ng-container>
+        </div>
+        <div class="p-4">
+          <h3 class="mb-2 text-foreground">{{ product.name }}</h3>
+          <p class="text-muted-foreground mb-3 text-sm leading-relaxed">
+            {{ product.description }}
+          </p>
+          <div class="flex items-center justify-between">
+            <span class="text-primary font-semibold text-lg">${{ product.price.toFixed(2) }}</span>
+            <button 
+              (click)="onAddToCart(product)"
+              class="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 transition-colors text-sm">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center items-center space-x-2">
+      <button 
+        [disabled]="!canGoPrevious()"
+        (click)="onPreviousPage()"
+        class="px-4 py-2 rounded-lg bg-card text-card-foreground border border-border hover:bg-accent/50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+        Anterior
+      </button>
+      <div class="flex space-x-1">
+        <button 
+          *ngFor="let page of [].constructor(totalFilteredPages); let i = index"
+          (click)="onPageChange(i + 1)"
+          [class]="isPageActive(i + 1) ? 'w-10 h-10 rounded-lg transition-colors bg-primary text-primary-foreground' : 'w-10 h-10 rounded-lg transition-colors bg-card text-card-foreground border border-border hover:bg-accent/50'">
+          {{ i + 1 }}
+        </button>
+      </div>
+      <button 
+        [disabled]="!canGoNext()"
+        (click)="onNextPage()"
+        class="px-4 py-2 rounded-lg bg-card text-card-foreground border border-border hover:bg-accent/50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+        Siguiente
+      </button>
+    </div>
+    
+    <div class="text-center mt-8">
+      <p class="text-muted-foreground">
+        <span *ngIf="totalFilteredProducts > 0">
+          Mostrando {{ startProduct }}-{{ endProduct }} de {{ totalFilteredProducts }} productos
+        </span>
+        <span *ngIf="totalFilteredProducts === 0">
+          No se encontraron productos en esta categoría
+        </span>
+      </p>
+    </div>
+
+  </div>
+</div>
