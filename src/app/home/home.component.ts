@@ -20,10 +20,12 @@ export class HomeComponent {
 
   onVerPromociones() {
     console.log('Navegar a promociones');
+    this.router.navigate(['/promociones']);
   }
 
   onContactar() {
     console.log('Navegar a contacto');
+    this.router.navigate(['/contacto']);
   }
 
   onExplorarMenu() {
